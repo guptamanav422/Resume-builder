@@ -1,54 +1,93 @@
-import { useHistory } from "react-router-dom";
-
+import { useState } from "react";
+import { useSelector } from "react-redux";
+import { Redirect, useHistory } from "react-router-dom";
+import { auth,createUserWithEmailAndPassword } from "../firebase";
 let Signup=()=>{
 
+    let [password,setPassword]=useState("");
+    let [confirmPassword,setConfirmPassword]=useState("");
+    let [email,setEmail]=useState("");
     let history=useHistory();
+    let user=useSelector(state=>state);
     return(
         <>
+         {user?<Redirect to= "/home" />:""}
         <div className="row">
         <div className="col-4 offset-4">
         <h1 className="mt-4 mb-4">Sign up!</h1>
         <form className="mt-4">
-        <div class="mb-3">
-          <label for="exampleInputEmail1" class="form-label">
+        <div className="mb-3">
+          <label  htmlFor="exampleInputEmail1" className="form-label">
             Email address
           </label>
           <input
             type="email"
-            class="form-control"
+            className="form-control"
             id="exampleInputEmail1"
+            value={email}
             aria-describedby="emailHelp"
+            onChange={(e)=>{
+                setEmail(e.currentTarget.value)
+            }}
           />
         </div>
-        <div class="mb-3">
-          <label for="exampleInputPassword1" class="form-label">
+        <div className="mb-3">
+          <label htmlFor="exampleInputPassword1" className="form-label">
             Password
           </label>
           <input
             type="password"
-            class="form-control"
+            className="form-control"
             id="exampleInputPassword1"
+            value={password}
+            onChange={(e)=>{
+                setPassword(e.currentTarget.value)
+            }}
           />
         </div>
-        <div class="mb-3">
-          <label for="exampleInputPassword2" class="form-label">
+        <div className="mb-3">
+          <label htmlFor="exampleInputPassword2" className="form-label">
             Confirm Password
           </label>
           <input
             type="password"
-            class="form-control"
-            id="exampleInputPassword1"
+            className="form-control"
+            id="exampleInputPassword2"
+            value={confirmPassword}
+            onChange={(e)=>{
+                setConfirmPassword(e.currentTarget.value)
+            }}
           />
         </div>
-        <button type="submit" class="btn btn-primary">
+        <button onClick={(e)=>{
+            e.preventDefault();
+            if(password===confirmPassword){
+                createUserWithEmailAndPassword(auth,email,password)
+                .then(()=>{
+                  alert("You are successfully signed In");
+                })
+                .catch((error)=>{
+                  alert("Please check your credentials")
+                })
+                setPassword("");
+                setConfirmPassword("");
+                setEmail("");
+            }
+            else{
+              alert("Your password are not same");
+              setPassword("");
+                setConfirmPassword("");
+
+            }
+        }} type="submit" className="btn btn-primary">
           Sign up
         </button>
         <br />
         <hr />
         <br />
-        <button onClick={()=>{
+        <button onClick={(e)=>{
             history.push("/login")
-        }} type="submit" class="btn btn-primary">
+        }} type="submit" className="btn btn-primary">
           Login 
         </button>
       </form>
