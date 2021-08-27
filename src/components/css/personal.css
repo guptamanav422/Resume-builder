@@ -1,0 +1,11 @@
+.personal-container{
+    height: 92vh;
+    display: flex;
+    border: 1px solid red;
+}
+
+.personal-from{
+    border: 1px solid;
+    width: 50%;
+    flex-grow: 1;
+}

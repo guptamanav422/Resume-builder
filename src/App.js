@@ -8,7 +8,7 @@ import { useEffect } from "react";
 import { doc, setDoc } from "firebase/firestore";
 import { useDispatch, useSelector } from "react-redux";
 import { userCreator } from "./redux/actions/userActions";
-import personalData from "./components/personalData";
+import PersonalData from "./components/personalData";
 function App() {
 
   let dispath=useDispatch();
@@ -39,7 +39,7 @@ function App() {
         <Navbar />
         <Switch>
           <Route path="/login"> <Login /></Route>
-          <Route path="/personal"> <personalData /></Route>
+          <Route path="/personal"> <PersonalData /></Route>
           <Route path="/signup"> <Signup /></Route>
           <Route path="/"> <Home /></Route>
         </Switch>
