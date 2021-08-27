@@ -1,9 +1,13 @@
+import { useState } from "react";
 import { useSelector } from "react-redux";
 import { Redirect, useHistory } from "react-router-dom";
-
+import { auth} from "../firebase";
+import {signInWithEmailAndPassword} from "../firebase"
 let Login = () => {
     let history= useHistory();
-    let user=useSelector(state=>state)
+    let user=useSelector(state=>state.user)
+    let [email,setEmail]=useState("");
+    let [password,setPassword]=useState("");
   return (
     <>
     {user?<Redirect to= "/home" />:""}
@@ -19,7 +23,11 @@ let Login = () => {
             type="email"
             className="form-control"
             id="exampleInputEmail1"
+            value={email}
             aria-describedby="emailHelp"
+            onChange={(e)=>{
+                setEmail(e.currentTarget.value)
+            }}
           />
         </div>
         <div className="mb-3">
@@ -30,9 +38,16 @@ let Login = () => {
             type="password"
             className="form-control"
             id="exampleInputPassword1"
+            value={password}
+            onChange={(e)=>{
+                setPassword(e.currentTarget.value)
+            }}
           />
         </div>
-        <button type="submit" className="btn btn-primary">
+        <button onClick={(e)=>{
+          e.preventDefault();
+          signInWithEmailAndPassword(auth,email,password);
+        }} type="submit" className="btn btn-primary">
           Login
         </button>
         <br />

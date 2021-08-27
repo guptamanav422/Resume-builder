@@ -1,7 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore ,collection} from "firebase/firestore"
-import { getAuth,createUserWithEmailAndPassword  } from "firebase/auth";
-
+import { getAuth,createUserWithEmailAndPassword } from "firebase/auth";
+import {signInWithEmailAndPassword} from "firebase/auth"
 const firebaseConfig = {
     apiKey: "AIzaSyBKZyZtugIQ2aFLfPQ8iXIrcTf01Jh6IlM",
     authDomain: "resume-7258e.firebaseapp.com",
@@ -14,6 +14,6 @@ const firebaseConfig = {
 
   export const auth = getAuth();
   export const firestore = getFirestore();
-  export {createUserWithEmailAndPassword, collection};
+  export {createUserWithEmailAndPassword, collection,signInWithEmailAndPassword}
   export const db = getFirestore(firebaseApp);
 

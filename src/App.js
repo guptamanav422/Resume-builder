@@ -8,12 +8,12 @@ import { useEffect } from "react";
 import { doc, setDoc } from "firebase/firestore";
 import { useDispatch, useSelector } from "react-redux";
 import { userCreator } from "./redux/actions/userActions";
-
+import personalData from "./components/personalData";
 function App() {
 
   let dispath=useDispatch();
 
-  let state= useSelector(state=> state);
+  let state= useSelector(state=> state.template);
   console.log(state);
 
   useEffect(() => {
@@ -39,6 +39,7 @@ function App() {
         <Navbar />
         <Switch>
           <Route path="/login"> <Login /></Route>
+          <Route path="/personal"> <personalData /></Route>
           <Route path="/signup"> <Signup /></Route>
           <Route path="/"> <Home /></Route>
         </Switch>
