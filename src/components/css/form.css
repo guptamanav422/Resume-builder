@@ -9,3 +9,15 @@
     width: 50%;
     flex-grow: 1;
 }
+
+.qual-gen{
+    position: fixed;
+    bottom: 12rem;
+    right: 40px;
+}
+
+.qual-save{
+    position: fixed;
+    bottom: 8rem;
+    right: 40px;
+}

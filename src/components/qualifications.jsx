@@ -3,10 +3,15 @@ import { useHistory } from "react-router-dom";
 import {detailCreator} from "../redux/actions/detailActions"
 import Preview from "./preview"
 import "./css/form.css"
+import {saveResume} from "../redux/actions/saveActions"
 let Qualifications=()=>{
     let dispatch= useDispatch();
     let history=useHistory();
-    let {degree,year,cgpa,college}= useSelector(state=>state.details);
+    let {degree,year,cgpa,college,isPublic}= useSelector(state=>state.details);
+
+    let details= useSelector(state=>state.details)
+    let code=useSelector(state=>state.template);
+    let {uid}=useSelector(state=>state.user)
     return(
         <>
         <div className="qual-container">
@@ -48,9 +53,15 @@ let Qualifications=()=>{
                              type="number" class="form-control" placeholder="year of grad"/>
                         </div>
                         <div class="form-check m-4">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+                        <input 
+                        check={isPublic}
+                        onClick={(e)=>{
+                            // console.log(e.currentTarget.checked);
+                            dispatch(detailCreator({year:e.currentTarget.checked}))
+                        }}
+                        class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
                         <label class="form-check-label" for="flexCheckDefault">
-                            Default checkbox
+                            Make Public
                         </label>
                         </div>
                     </div>
@@ -65,6 +76,12 @@ let Qualifications=()=>{
 
                 <Preview />
             </div>
+            <button className="btn btn-primary qual-gen">Generate Link</button>
+            <button 
+            onClick={()=>{
+                dispatch(saveResume(uid,details,code))
+            }}
+            className="btn btn-primary qual-save">Save to Database</button>
         </>
     )
 }
