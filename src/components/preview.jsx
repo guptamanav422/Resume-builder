@@ -1,10 +1,44 @@
+import { useSelector } from "react-redux";
 import "./css/preview.css"
-let preview=()=>{
+let Preview=()=>{
+    let {fname,lname,college,state,city,email,phone,cgpa,degree,year,}=useSelector(state=>state.details);
+    let templateCode=useSelector(state=>state.template)
     return(
         <>
-        <div className="preview-container"></div>
+        <div className="preview-container">
+            <p className={`template-${templateCode}`}>
+                {fname}
+            </p>
+            <p className={`template-${templateCode}`}>
+                {lname}
+            </p>
+            <p className={`template-${templateCode}`}>
+                {email}
+            </p>
+            <p className={`template-${templateCode}`}>
+                {phone}
+            </p>
+            <p className={`template-${templateCode}`}>
+                {city}
+            </p>
+            <p className={`template-${templateCode}`}>
+                {state}
+            </p>
+            <p className={`template-${templateCode}`}>
+                {degree}
+            </p>
+            <p className={`template-${templateCode}`}>
+                {cgpa}
+            </p>
+            <p className={`template-${templateCode}`}>
+                {year}
+            </p>
+            <p className={`template-${templateCode}`}>
+                {college}
+            </p>
+        </div>
         </>
     )
 }
 
-export default preview;
+export default Preview;

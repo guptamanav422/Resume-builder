@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux"
 import "./css/personal.css"
-import Preview from "./preview"
+import Preview from "./preview.jsx"
 import {detailCreator} from "../redux/actions/detailActions"
 let PersonalData = () => {
     let details=useSelector(state=>state.details);
