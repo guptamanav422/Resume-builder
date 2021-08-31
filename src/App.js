@@ -9,6 +9,8 @@ import { doc, setDoc } from "firebase/firestore";
 import { useDispatch, useSelector } from "react-redux";
 import { userCreator } from "./redux/actions/userActions";
 import PersonalData from "./components/personalData";
+import Qualifications from "./components/qualifications";
+
 function App() {
 
   let dispath=useDispatch();
@@ -38,6 +40,7 @@ function App() {
       <Router>
         <Navbar />
         <Switch>
+          <Route path="/qualifications"> <Qualifications /></Route>
           <Route path="/login"> <Login /></Route>
           <Route path="/personal"> <PersonalData /></Route>
           <Route path="/signup"> <Signup /></Route>
